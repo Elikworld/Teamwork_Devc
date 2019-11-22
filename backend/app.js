@@ -1,26 +1,24 @@
-const express = require('express');
+import express from 'express';
+import dotenv from 'dotenv';
+import morgan from 'morgan';
+import cors from 'cors';
+import {homeRouter} from './routes';
+
+dotenv.config();
 
 const app = express();
 
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: 'false'}));
+app.use(morgan('dev'));
+app.use(cors());
 
-const courses = [
-    { id: 1, name: 'course1' },
-    { id: 2, name: 'course2' },
-    { id: 3, name: 'course3' }
-];
 
-app.get('/', (req, res) => {
-    res.send('Hello world');
-})
 
-app.post('/api/courses', (req, res) => {
-    const course = {
-        id: courses.length + 1,
-        name: req.body.name,
-    };
-    courses.push(course);
-    res.send(course);
-});
+const baseRoute = '/teamwork';
 
-module.exports = app;
+//connect to routes
+app.use(`${baseRoute}/`, homeRouter);
+
+export default app;

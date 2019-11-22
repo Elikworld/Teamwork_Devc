@@ -21,6 +21,8 @@
         "linebreak-style": 0,
         "arrow-body-style": "off",
         "consistent-return": 0,
-        "no-restricted-global": 0
+        "no-restricted-globals": 0,
+        "import/no-dynamic-require": "off",
+        "import/no-extraneous-dependencies": "off"
     }
 }
